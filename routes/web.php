@@ -38,3 +38,23 @@ Route::get('/repetir/{nome}/{n}', function($nome, $n){ // vai repetir o nome a q
     else
         echo "Você não digitou um inteiro";   
 });
+
+//PARAMETROS RESTRITOS
+
+Route::get('/seunomecomregra/{nome}/{n}', function($nome, $n){
+    for($i=0; $i<$n; $i++){
+        echo "<h1>Olá, $nome! ($i) </h1>"; // exemplo browser: http://localhost:8000/repetir/bruna/10
+    };
+})->where('n', '[0-9]+')->where('nome', '[A-Za-z]+'); //expressão regular. restringir o n variando de 0 a 9 com 1 ou mais digito +
+
+//PARAMETROS OPCIONAIS
+
+Route::get('/seunomesemregra/{nome?}', function($nome=null){ // o parametro {?} com o ponto de interrogação faz com que ele seja opcional, entrando na rota sem o parametro. nome=null caso não receba nenhum nome, passa-se um parametro null(valor defult caso chame sem o nome)
+    if(isset($nome)){ // para ser opcional é necessário uma verificação se o parametro foi setado, se não o echo vai esta vazio
+        echo "<h1>Olá, $nome!</h1>"; //Exemplo:http://localhost:8000/seunomesemregra/Maria
+    }
+    else{
+        echo "Você não passou nenhum nome"; //Exemplo:http://localhost:8000/seunomesemregra
+    }
+
+});
