@@ -56,5 +56,18 @@ Route::get('/seunomesemregra/{nome?}', function($nome=null){ // o parametro {?} 
     else{
         echo "Você não passou nenhum nome"; //Exemplo:http://localhost:8000/seunomesemregra
     }
+});
 
+//Agrupamento de rotas. Utiliza quando quer montar uma hierarquia. Ex. Produtos/info/codigoproduto
+
+Route::prefix('app')->group(function(){ //Por questao de organização, é possivel criar a hierarquia de forma mais evidente.
+    Route::get("/", function(){
+        return "Pagina principal do APP"; //Exemplo: http://localhost:8000/app
+    });
+    Route::get("profile", function(){
+        return "Pagina Profile";//Exemplo: http://localhost:8000/app/profile
+    });
+    Route::get("about", function(){
+        return "Meu About"; //Exemplo: http://localhost:8000/app/about
+    });
 });
