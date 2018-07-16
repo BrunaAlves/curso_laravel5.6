@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Http\Request;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('welcome');
@@ -91,5 +82,44 @@ Route::get('/hellonome/{nome}/{sobrenome}', function($nome, $sn){
 });
 
 
+//MÉTODOS HTTP(baixar extensão Google Chrome "Advanced REST client")
 
+Route::get('/rest/hello', function(){
+    return "Hello (GET)";
+});
 
+Route::post('/rest/hello', function(){
+    return "Hello (POST)";
+});
+
+Route::delete('/rest/hello', function(){
+    return "Hello (DELETE)";
+});
+
+Route::put('/rest/hello', function(){
+    return "Hello (PUT)";
+});
+
+Route::patch('/rest/hello', function(){
+    return "Hello (PATCH)";
+});
+
+Route::options('/rest/hello', function(){
+    return "Hello (OPTIONS)";
+});
+
+//METODOS HTTP COM REQUEST
+
+Route::post('/rest/imprimir', function(Request $req){ //Pega os dados de um formulario(por exemplo) enviado por post, put etc.
+    $nome = $req->input('nome');
+    $idade = $req->input('idade');
+    return "Hello $nome ($idade)!! (POST)";
+});
+
+Route::match(['get','post'], '/rest/hello2', function(){ //Agrupar varios metodos para uma mesma função. Ordem dos parametros: métodos que serão atendidos na requisição, seguido da rota que esta configurando e o que será feito assim que chegar a requisição.
+    return "Hello World 2";
+});
+
+Route::any('/rest/hello3', function(){ //Atender qualquer métodos Http.
+    return "Hello World 3";
+});
