@@ -71,3 +71,25 @@ Route::prefix('app')->group(function(){ //Por questao de organização, é possi
         return "Meu About"; //Exemplo: http://localhost:8000/app/about
     });
 });
+
+//REDIRECIONAMENTO
+
+Route::redirect('/aqui', '/ola', 301); //Tudo que chegar no "aqui" será redirecionado para o "ola". Código 301 Vai falar para o browser que o /aqui foi removido para o /ola
+
+//Direcionar para a view
+Route::view('/hello', 'hello'); //função anomima que sera executada cada vez que o usuário executar a rota. Somente o nome do arquivo, sem a extensão do mesmo.
+
+//Passar parâmetros da rota para a view. 
+Route::view('/viewnome', 'hellonome', 
+            ['nome'=>'Bruna', 'sobrenome'=> 'Alves']); //Primeiro parametro é a rota e o segundo é a view. Array associativo, com o primeiro indice nome e o segundo sobrenome, seguido cada um de seus parametros que esperam ser recebidos na view
+
+//Passar o parametro depois da rota e mandar pra view
+
+Route::get('/hellonome/{nome}/{sobrenome}', function($nome, $sn){
+    return view('hellonome', 
+                ['nome'=>$nome, 'sobrenome'=> $sn]); //Exemplo: http://localhost:8000/hellonome/Bruna/Alves
+});
+
+
+
+
