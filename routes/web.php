@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
-    return view('welcome');
+    return view('filho');
 });
 
 Route::get('/ola', function () { //utilização simples das rotas
