@@ -144,3 +144,9 @@ Route::get('/linkprodutos', function(){ //caso a rota seja alterada, é mais seg
 Route::get("/redirecionarprodutos", function(){
     return redirect()->route('meusprodutos');
 });
+
+//----------------------------FIM DO TÓPICO DE ROTAS
+
+//----------------------------INICIO TÓPICO DE CONTROLLER
+
+Route::get('/nome', 'MeuControlador@getNome'); //Estou mandando uma requisição que vai direto para o meu controlador. Nome da rota, nomedocontrolador@nomedafuncao. Quando eu colocar /nome, automaticamente vai chamar o metodo do meu controlador
