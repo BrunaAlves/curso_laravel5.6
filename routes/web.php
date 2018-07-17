@@ -149,4 +149,15 @@ Route::get("/redirecionarprodutos", function(){
 
 //----------------------------INICIO TÓPICO DE CONTROLLER
 
-Route::get('/nome', 'MeuControlador@getNome'); //Estou mandando uma requisição que vai direto para o meu controlador. Nome da rota, nomedocontrolador@nomedafuncao. Quando eu colocar /nome, automaticamente vai chamar o metodo do meu controlador
+Route::get('/nome', 'MeuControlador@getNome'); //Manda uma requisição que vai direto para o meu controlador. Nome da rota, nomedocontrolador@nomedafuncao. Quando eu colocar /nome, automaticamente vai chamar o metodo do meu controlador. Dentro do controlador eu faço o tratamento da requisição.
+
+Route::get('/idade', 'MeuControlador@getIdade'); //Passando parametros para o controlador
+
+Route::get('/multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar'); //Faz uma requisição para controlador@multiplicar já passando os dois parametros para o metodo do controller
+
+Route::get('nomes/{id}', 'MeuControlador@getNomeByID'); //Exemplo: http://localhost:8000/nomes/1
+
+
+
+
+
