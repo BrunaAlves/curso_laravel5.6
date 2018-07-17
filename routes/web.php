@@ -171,5 +171,26 @@ Route::get('/primeiraview', function(){
     return view('minhaview');
 });
 
+Route::get('/ola', function(){
+    return view('minhaview')
+        ->with('nome', 'Joana')
+        ->with('sobrenome', 'Amaral'); //declaro a "variavel" e seu valor, que será passado para a view(no caso a "minhaview")
+});
+
+Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome){
+    /*
+    return view('minhaview')
+        ->with('nome', $nome)
+        ->with('sobrenome', $sobrenome); //parametros serão passados na url
+    */
+    /*
+    $parametros = ['nome'=>$nome, 'sobrenome'=>$sobrenome]; //Array associativo
+    return view ('minhaview', $parametros);
+    */
+    return view('minhaview', compact('nome', 'sobrenome')); //funcao do php, que passasse as variaveis e ele monta o array associativo através da função
+});
+
+
+
 
 
