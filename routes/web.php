@@ -157,7 +157,10 @@ Route::get('/multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar'); //Faz uma re
 
 Route::get('nomes/{id}', 'MeuControlador@getNomeByID'); //Exemplo: http://localhost:8000/nomes/1
 
+//REQUISIÇÕES HTTP
 
+Route::resource('/cliente', 'ClienteControlador'); //Ao criar um controllador Resource, essa rota cria outras rotas para cada metodo HTTP
 
+Route::post('/cliente/requisitar', 'ClienteControlador@requisitar');
 
 
