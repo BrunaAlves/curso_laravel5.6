@@ -163,4 +163,13 @@ Route::resource('/cliente', 'ClienteControlador'); //Ao criar um controllador Re
 
 Route::post('/cliente/requisitar', 'ClienteControlador@requisitar');
 
+//----------------------------FIM TÓPICO DE CONTROLLER
+
+//----------------------------INICIO TÓPICO DE VIEW
+
+Route::get('/primeiraview', function(){
+    return view('minhaview');
+});
+
+
 
