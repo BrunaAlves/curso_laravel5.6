@@ -190,6 +190,12 @@ Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome){
     return view('minhaview', compact('nome', 'sobrenome')); //funcao do php, que passasse as variaveis e ele monta o array associativo através da função
 });
 
+Route::get('/email/{email}', function($email){
+    if(View::exists('email')) //metodo static que verifica se uma view existe
+        return view('email', compact('email'));
+    else
+        return view('erro');
+});
 
 
 
