@@ -123,3 +123,24 @@ Route::match(['get','post'], '/rest/hello2', function(){ //Agrupar varios metodo
 Route::any('/rest/hello3', function(){ //Atender qualquer métodos Http.
     return "Hello World 3";
 });
+
+//NOMEANDO ROTAS
+
+Route::get('/produtos', function(){
+    echo "<h1>Produtos</h1>";
+    echo "<ol>";
+    echo "<li>Notebook</li>";
+    echo "<li>Impressora</li>";
+    echo "<li>Mouse</li>";
+    echo "</ol>";
+
+})->name('meusprodutos'); //nome da rota. Verificar em php artisan route:list
+
+Route::get('/linkprodutos', function(){ //caso a rota seja alterada, é mais seguro pois foi utilizado o nome da rota e não a tag da rota.
+    $url = route('meusprodutos');
+    echo "<a href=\"". $url. "\">Meus produtos</a>";
+});
+
+Route::get("/redirecionarprodutos", function(){
+    return redirect()->route('meusprodutos');
+});
