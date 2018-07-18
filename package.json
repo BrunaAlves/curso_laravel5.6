@@ -11,12 +11,15 @@
     },
     "devDependencies": {
         "axios": "^0.18",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-preset-env": "^1.7.0",
         "bootstrap": "^4.0.0",
-        "popper.js": "^1.12",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "popper.js": "^1.12",
+        "webpack": "^4.16.1"
     }
 }
