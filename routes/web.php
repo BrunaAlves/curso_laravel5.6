@@ -197,6 +197,6 @@ Route::get('/email/{email}', function($email){
         return view('erro');
 });
 
-
+Route::get('/produtos', 'ProdutoControlador@listar');
 
 
