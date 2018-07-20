@@ -1,3 +1,4 @@
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-{{$tipo}}" role="alert">
+      <div class="alert-title"> {{$titulo}} </div>
         {{$slot}}
 </div>
