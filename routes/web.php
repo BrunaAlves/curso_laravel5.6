@@ -202,5 +202,9 @@ Route::get('/produtos', 'ProdutoControlador@listar');
 Route::get('/secaoprodutos/{palavra}', 
            'ProdutoControlador@secaoprodutos');
 
+Route::get('/mostraropcoes', 'ProdutoControlador@mostrar_opcoes');
+
+Route::get('/opcoes/{opcao}', 'ProdutoControlador@opcoes');
+
 
 
