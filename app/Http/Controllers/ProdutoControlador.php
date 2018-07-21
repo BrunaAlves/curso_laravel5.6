@@ -30,4 +30,20 @@ class ProdutoControlador extends Controller
     public function opcoes($opcao){
         return view('opcoes', compact('opcao'));
     }
+
+    public function loopFor($n){
+        return view('loop_for', compact('n'));
+    }
+
+    public function loopForeach(){
+        $produtos = [
+            ["id" => 1, "nome"=>"computador"],
+            ["id" => 2, "nome"=>"mouse"],
+            ["id" => 3, "nome"=>"impressora"],
+            ["id" => 4, "nome"=>"monitor"],
+            ["id" => 5, "nome"=>"teclado"],
+        ];
+
+        return view('foreach', compact('produtos'));
+    }
 }
