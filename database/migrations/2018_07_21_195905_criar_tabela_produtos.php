@@ -15,6 +15,9 @@ class CriarTabelaProdutos extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) { //é a classe que vai ser utilizada e contem todos os metodos para criação, remoção e manutenção das tabelas do banco de dados
             $table->increments('id');
+            $table->string('nome');
+            $table->float('preco');
+            $table->integer('estoque');
             $table->timestamps();
         });
     }
