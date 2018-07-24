@@ -347,3 +347,26 @@ Route::get('/atualizandocategorias', function(){ //UPDATE
     echo "id: " . $cat->id . "; ";
     echo "nome: " . $cat->nome . "<br> ";
 });
+
+Route::get('/removendocategorias', function(){ //DELETE
+    
+    echo "<p> Antes da remoção </p>";
+    
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<hr>";
+
+    //DB::table('categorias')->where('id', 1)->delete();
+    DB::table('categorias')->whereNotIn('id', [1,2,3,4,5,6])->delete();
+    
+    echo "<p> Depois da atualização </p>";
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+});
