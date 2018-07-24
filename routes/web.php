@@ -318,3 +318,17 @@ Route::get('/categorias', function(){
     }
 
 });
+
+Route::get('/novascategorias', function(){
+    DB::table('categorias')->insert([
+        ['nome' => 'Cama mesa e banho'],
+        ['nome' => 'Informática'],
+        ['nome'=> 'Cozinha']
+    ]);
+    
+    /*
+        $id = DB::table('categorias')->insertGetId(['nome' => 'Carros']);
+
+        echo "Novo ID = $id <br>";
+    */
+});
