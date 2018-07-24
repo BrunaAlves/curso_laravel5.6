@@ -402,3 +402,30 @@ Route::get('/categoria/{id}', function($id){
         echo "<h1> Categoria não encontrada!</h1>";
     }
 });
+
+Route::get('/atualizar/{id}/{nome}', function($id, $nome){
+    
+    $cat = Categoria::find($id);
+    if(isset($cat)){
+        $cat->nome = $nome;
+        $cat->save();
+
+        return redirect('listartodos');
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
+
+Route::get('/remover/{id}', function($id){
+    
+    $cat = Categoria::find($id);
+    if(isset($cat)){
+        $cat->delete();
+
+        return redirect('listartodos');
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
