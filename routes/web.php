@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Categoria;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('pagina');
@@ -368,5 +369,24 @@ Route::get('/removendocategorias', function(){ //DELETE
     foreach($cats as $cat) {
         echo "id: " . $cat->id . "; ";
         echo "nome: " . $cat->nome . "<br> ";
+    }
+});
+
+//ELOQUENT / ORM
+
+Route::get('/inserir/{nome}', function($nome){
+    $cat = new Categoria();
+    $cat->nome = $nome;
+    $cat->save();
+
+    return redirect('listartodos');
+});
+
+Route::get('/listartodos', function(){
+    $categorias = Categoria::all();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br>";
+
     }
 });
