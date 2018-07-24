@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('pagina');
@@ -211,3 +212,19 @@ Route::get('/loop/for/{n}', 'ProdutoControlador@loopFor');
 Route::get('/loop/foreach', 'ProdutoControlador@loopForeach');
 
 
+//INICIO MODELOS: QUERIES SQL
+
+Route::get('/categorias', function(){
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<hr>";
+
+    $nomes = DB::table('categorias')->pluck('nome'); //retorna todos os nomes
+    foreach($nomes as $nome){
+        echo "$nome <br>";
+    }
+});
