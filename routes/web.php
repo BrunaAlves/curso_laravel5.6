@@ -521,3 +521,17 @@ Route::get('/restaurar/{id}', function($id){ // mostra os dados que foram apagad
         echo "<h1> Categoria não encontrada!</h1>";
     }
 });
+
+Route::get('/apagarpermanente/{id}', function($id){ // mostra os dados que foram apagados(Soft Deletes)
+    
+    $cat = Categoria::withTrashed()->find($id);
+
+    if(isset($cat)){
+        $cat->forceDelete(); //restaura dados apagados(Soft Deletes)
+        
+        return redirect('/todas');
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
