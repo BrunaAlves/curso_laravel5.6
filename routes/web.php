@@ -227,4 +227,19 @@ Route::get('/categorias', function(){
     foreach($nomes as $nome){
         echo "$nome <br>";
     }
+
+    echo "<hr>";
+
+    $cats = DB::table('categorias')->where('id', 1)->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<hr>";
+    
+    $cats = DB::table('categorias')->where('id', 1)->first(); //pegar somente um elemento sem utilizar array
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    
 });
