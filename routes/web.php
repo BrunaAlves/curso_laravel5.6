@@ -479,3 +479,31 @@ Route::get('/todas', function(){ //Listar todos os dados, até os apagados com s
 
     }
 });
+
+Route::get('/ver/{id}', function($id){ // mostra os dados que foram apagados(Soft Deletes)
+    
+    //$cat = Categoria::withTrashed()->find($id);
+
+    $cat = Categoria::withTrashed()->where('id', $id)->get()->first();
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "nome: " . $cat->nome . "<br>";
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
+
+Route::get('/somenteapagadas', function(){ //Listar todos os dados, até os apagados com softDeletes
+    $categorias = Categoria::onlyTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome;
+
+        if($c->trashed()) //função boolean
+            echo '(apagado)<br>';
+        else
+            echo '<br>';
+
+    }
+});
