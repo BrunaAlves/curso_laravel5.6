@@ -214,7 +214,7 @@ Route::get('/loop/foreach', 'ProdutoControlador@loopForeach');
 
 //INICIO MODELOS: QUERIES SQL
 
-Route::get('/categorias', function(){
+Route::get('/categorias', function(){ //SELECT
     $cats = DB::table('categorias')->get();
     foreach($cats as $cat) {
         echo "id: " . $cat->id . "; ";
@@ -319,7 +319,7 @@ Route::get('/categorias', function(){
 
 });
 
-Route::get('/novascategorias', function(){
+Route::get('/novascategorias', function(){ //INSERT
     DB::table('categorias')->insert([
         ['nome' => 'Cama mesa e banho'],
         ['nome' => 'Informática'],
@@ -331,4 +331,19 @@ Route::get('/novascategorias', function(){
 
         echo "Novo ID = $id <br>";
     */
+});
+
+Route::get('/atualizandocategorias', function(){ //UPDATE
+
+    $cat = DB::table('categorias')->where('id', 1)->first();
+    echo "<p> Antes da atualização </p>";
+    echo "id: " . $cat->id . "; ";
+    echo "nome: " . $cat->nome . "<br> ";
+
+    DB::table('categorias')->where('id', 1)->update(['nome'=> 'Roupas infantis']);
+
+    $cat = DB::table('categorias')->where('id', 1)->first();
+    echo "<p> Depois da atualização </p>";
+    echo "id: " . $cat->id . "; ";
+    echo "nome: " . $cat->nome . "<br> ";
 });
