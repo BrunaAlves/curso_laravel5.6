@@ -242,4 +242,51 @@ Route::get('/categorias', function(){
         echo "id: " . $cat->id . "; ";
         echo "nome: " . $cat->nome . "<br> ";
     
+    echo "<p>Retornar um Array utilizando like</p>";
+
+    $cats = DB::table('categorias')->where('nome', 'like', '%p%')->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<p>Sentenças lógicas</p>";
+
+    $cats = DB::table('categorias')->where('id', 1)->orWhere('id', 2)->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<p>Intervalo</p>";
+
+    $cats = DB::table('categorias')->whereBetween('id', [1, 4])->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<p>Fora do Intervalo</p>";
+
+    $cats = DB::table('categorias')->whereNotBetween('id', [1, 3])->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<p>Conjunto</p>";
+
+    $cats = DB::table('categorias')->whereIn('id', [1, 3, 4])->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
+
+    echo "<p>Fora do Conjunto</p>";
+
+    $cats = DB::table('categorias')->whereNotIn('id', [1, 3, 4])->get(); //array contendo um element
+    foreach($cats as $cat) {
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "<br> ";
+    }
 });
