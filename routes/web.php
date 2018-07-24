@@ -390,3 +390,15 @@ Route::get('/listartodos', function(){
 
     }
 });
+
+Route::get('/categoria/{id}', function($id){
+    //$cat = Categoria::find($id);
+    $cat = Categoria::findOrFail($id);
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "nome: " . $cat->nome . "<br>";
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
