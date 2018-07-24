@@ -507,3 +507,17 @@ Route::get('/somenteapagadas', function(){ //Listar todos os dados, até os apag
 
     }
 });
+
+Route::get('/restaurar/{id}', function($id){ // mostra os dados que foram apagados(Soft Deletes)
+    
+    $cat = Categoria::withTrashed()->find($id);
+
+    if(isset($cat)){
+        $cat->restore(); //restaura dados apagados(Soft Deletes)
+        echo "Categoria Restaurada: " . $cat->id . "<br>";
+        echo "<a href =\"/listartodos\"> Listar todas </a> ";
+    }
+    else{
+        echo "<h1> Categoria não encontrada!</h1>";
+    }
+});
