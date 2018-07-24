@@ -429,3 +429,39 @@ Route::get('/remover/{id}', function($id){
         echo "<h1> Categoria não encontrada!</h1>";
     }
 });
+
+Route::get('/categoriapornome/{nome}', function($nome){
+    
+    $categorias = Categoria::where('nome', $nome)->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br>";
+
+    }
+});
+
+Route::get('/categoriaidmaiorque/{id}', function($id){
+    
+    $categorias = Categoria::where('id', '>' ,$id)->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br>";
+
+    }
+
+    $count = Categoria::where('id', '>' ,$id)->count();
+    echo "<h1> Count: $count </h1>";
+
+    $max = Categoria::where('id', '>' ,$id)->max('id');
+    echo "<h1> Max: $max </h1>";
+});
+
+Route::get('/ids121314', function(){
+    
+    $categorias = Categoria::find([12, 13, 14]);
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br>";
+
+    }
+});
