@@ -465,3 +465,17 @@ Route::get('/ids121314', function(){
 
     }
 });
+
+Route::get('/todas', function(){ //Listar todos os dados, até os apagados com softDeletes
+    $categorias = Categoria::withTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome;
+
+        if($c->trashed()) //função boolean
+            echo '(apagado)<br>';
+        else
+            echo '<br>';
+
+    }
+});
