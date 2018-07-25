@@ -538,6 +538,6 @@ Route::get('/apagarpermanente/{id}', function($id){ // mostra os dados que foram
 
 //VALIDAÇÃO DE FORMULÁRIOS
 
-Route::get('/novocliente', function () { //função anomima que sera executada cada vez que o usuário executar a rota
-    return view('novocliente');
-});
+Route::get('/novocliente', 'ClienteControlador@create');
+
+Route::get('/clientes', 'ClienteControlador@index');

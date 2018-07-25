@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Cliente;
+
 class ClienteControlador extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class ClienteControlador extends Controller
      */
     public function index() // lista
     {
-        return "Lista de todos os clientes - Raiz";
+        $clientes = Cliente::all();
+        return view('cliente', compact('clientes'));
     }
 
     /**
@@ -23,8 +26,7 @@ class ClienteControlador extends Controller
      */
     public function create() //Mostra o formulário de criar
     {
-        return "Formulário para Cadastrar novo Cliente";
-        //return view('formulariocadastro');
+        return view('novocliente');
     }
 
     /**
