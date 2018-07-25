@@ -535,3 +535,9 @@ Route::get('/apagarpermanente/{id}', function($id){ // mostra os dados que foram
         echo "<h1> Categoria não encontrada!</h1>";
     }
 });
+
+//VALIDAÇÃO DE FORMULÁRIOS
+
+Route::get('/novocliente', function () { //função anomima que sera executada cada vez que o usuário executar a rota
+    return view('novocliente');
+});
