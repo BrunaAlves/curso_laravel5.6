@@ -1,38 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{URL::to('css/app.css')}}" rel="stylesheet">
-    <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
-</head>
-<body>
+@extends('layout.app', ["current" => "produtos"])
 
-    @if(isset($produtos))
+@section('body')
+    <div class="card border">
+        <div class="card-body">
+            <h5 class="card-title">Cadastro de Produtos</h5>
+            @if(count($prods) > 0)
+                <table class="table table-ordered table-hover">
+                    <thread>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome do Produto</th>
+                            <th>Qtd Estoque</th>
+                            <th>Preço</th>
+                            <th>Categoria</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        @foreach($prods as $prod)
+                            <tr>
+                                <td>{{$prod->id}}</td>
+                                <td>{{$prod->nome}}</td>
+                                <td>{{$prod->estoque}}</td>
+                                <td>{{$prod->preco}}</td>
+                                <td>{{$prod->categoria_id}}</td>
+                                <td>
+                                    <a href="/produtos/editar/{{$prod->id}}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+        <div class="card-footer">
+            <a href="/produtos/novo" class="btn btn-sm btn-primary" role="button">Novo produto</a>
+        </div>
+    </div>
 
-        @if(count($produtos) == 0)
-            <h1>Nenhum produto</h1>
-        @elseif (count($produtos) === 1)
-            <h1> Um produtos</h1>
-        @else
-        <h1> Temos vários produtos</h1>
-        @endif
 
-        @foreach($produtos as $p)
-            <p> Nome: {{$p}} </p>
-        @endforeach
+    
 
-    @else
-        <h2>Variável produtos não foi passada como parâmetro.</h2>
-    @endif
-
-    @empty($produtos)
-        <h1> Nada em produtos</h1>
-    @endempty
-    <script src="{{ URL:: to('js/app.js')}}" type="text/javascript"></script>
-    <!-- <script src="{{asset('js/app.js')}}" type="text/javascript"></script> -->
-
-</body>
-</html>
+@endsection
