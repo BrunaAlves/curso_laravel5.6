@@ -38,7 +38,7 @@ class ClienteControlador extends Controller
     public function store(Request $request) //Recebe os dados criados e adiciona. request de algum modo envia um metodo e recebe os dados.
     {
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'required|min:5|max:10',
             
         ]);
 
