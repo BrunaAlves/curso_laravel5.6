@@ -37,13 +37,29 @@ class ClienteControlador extends Controller
      */
     public function store(Request $request) //Recebe os dados criados e adiciona. request de algum modo envia um metodo e recebe os dados.
     {
-        $request->validate([
+        $regras = [
+            'nome' => 'required|min:3|max:20|unique:clientes',
+            'idade' => 'required',
+            'endereco' => 'required|min:5',
+            'email' => 'required|email'
+        ];
+        $mensagens = [
+            'required' => 'O atributo :attribute não pode estar em branco',
+            'nome.required' => 'O nome é requerido',
+            'nome.min' => 'É necessário no minimo 3 caracteres no nome',
+            'email.required' => 'Digite um endereço de email',
+            'email.email' => 'Digite um endereço de email válido'
+
+        ];
+        $request->validate($regras, $mensagens);
+
+       /* $request->validate([
             'nome' => 'required|min:3|max:20|unique:clientes',
             'idade' => 'required',
             'endereco' => 'required|min:5',
             'email' => 'required|email'
             
-        ]);
+        ]); */
 
        $cliente = new Cliente();
        $cliente->nome = $request->input('nome');
