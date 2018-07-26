@@ -37,10 +37,13 @@ class ClienteControlador extends Controller
      */
     public function store(Request $request) //Recebe os dados criados e adiciona. request de algum modo envia um metodo e recebe os dados.
     {
-        $s = "Armazenar: ";
-        $s .= "Nome: " . $request->input('nome') . " e "; //Espera receber um dos input com o name "nome"
-        $s .= "Idade: " . $request->input('idade');
-        return response($s, 201);
+       $cliente = new Cliente();
+       $cliente->nome = $request->input('nome');
+       $cliente->idade = $request->input('idade');
+       $cliente->endereco = $request->input('endereco');
+       $cliente->email = $request->input('email');
+       $cliente->save();
+
     }
 
     /**

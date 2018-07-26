@@ -541,3 +541,5 @@ Route::get('/apagarpermanente/{id}', function($id){ // mostra os dados que foram
 Route::get('/novocliente', 'ClienteControlador@create');
 
 Route::get('/clientes', 'ClienteControlador@index');
+
+Route::post('/cliente', 'ClienteControlador@store');
