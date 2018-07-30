@@ -4,7 +4,7 @@
     <div class="card border">
         <div class="card-body">
             <h5 class="card-title">Cadastro de Produtos</h5>
-                <table class="table table-ordered table-hover">
+                <table class="table table-ordered table-hover" id="tabelaProdutos">
                     <thread>
                         <tr>
                             <th>Código</th>
@@ -15,11 +15,6 @@
                             <th>Ações</th>
                         </tr>
                     </thread>
-                    <tbody>
-                            <tr>
-                            
-                            </tr>
-                    </tbody>
                 </table>
         </div>
         <div class="card-footer">
@@ -92,9 +87,35 @@
                 }
             });
         }
+        
+        function montarLinha(p){
+            var linha = "<tr>" +
+                "<td>" + p.id + "</td>" +
+                "<td>" + p.nome + "</td>" +
+                "<td>" + p.estoque + "</td>" +
+                "<td>" + p.preco + "</td>" +
+                "<td>" + p.categoria_id + "</td>" +
+                "<td>" +
+                 '<button class="btn btn-sm btn-primary"> Editar </button> ' +
+                 '<button class="btn btn-sm btn-danger"> Apagar </button> ' +
+                "</td>" +
+                "<tr>";
+            return linha;
+        }
+
+        function carregarProdutos() {
+            $.getJSON('/api/produtos', function(produtos){
+               // console.log(data);
+                for(i=0;i<produtos.length;i++){
+                    linha = montarLinha(produtos[i]);
+                    $('#tabelaProdutos>tbody').append(linha);
+                }
+            });
+        }
 
         $(function(){
             carregarCategorias();
+            carregarProdutos();
         })
     </script>
 @endsection
