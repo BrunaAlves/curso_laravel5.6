@@ -26,7 +26,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form class="form-horizontal" id="formProduto">
-            @csrf
                 <div class="modal-header">
                     <h5 class="modal-title"> Novo produto</h5>
                 </div>
@@ -41,13 +40,13 @@
                     <div class="form-group">
                         <label for="precoProduto" class="control-label"> Preço</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="precoProduto" placeholder="Preço do Produto">
+                            <input type="number" class="form-control" id="precoProduto" placeholder="Preço do Produto">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="quantidadeProduto" class="control-label"> Quantidade</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="quantidadeProduto" placeholder="Quantidade do Produto">
+                            <input type="number" class="form-control" id="quantidadeProduto" placeholder="Quantidade do Produto">
                         </div>
                     </div>
                     <div class="form-group">
@@ -70,11 +69,13 @@
 
 @section('javascript')
     <script type="text/javascript">
+    
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             }
         });
+
         function novoProduto(){
             $('#id').val('');
             $('#nomeProduto').val('');
@@ -117,6 +118,30 @@
                 }
             });
         }
+        
+        function criarProduto(){
+            prod = {
+                nome: $("#nomeProduto").val(),
+                preco: $("#precoProduto").val(),
+                estoque: $("#quantidadeProduto").val(),
+                categoria_id: $("#categoriaProduto").val()
+            };
+           // console.log(prod);
+            $.post("/api/produtos", prod, function(data){
+              //  event.preventDefault();
+              // criarProduto();
+              console.log(data);
+
+            });
+        }
+
+        $("#formProduto").submit( function(event){
+            event.preventDefault();
+           // console.log('teste');
+            criarProduto();
+            $("#dlgProdutos").modal('hide');
+
+        });
 
         $(function(){
             carregarCategorias();
