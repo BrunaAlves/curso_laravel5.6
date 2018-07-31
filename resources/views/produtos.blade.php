@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <button type="cancel" class="btn btn-secondary" data-dissmiss="modal">Cancelar</button>
+                    <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -130,7 +130,10 @@
             $.post("/api/produtos", prod, function(data){
               //  event.preventDefault();
               // criarProduto();
-              console.log(data);
+            //  console.log(data);
+            produto = JSON.parse(data);
+              linha = montarLinha(produto);
+              $('#tabelaProdutos>tbody').append(linha);
 
             });
         }
