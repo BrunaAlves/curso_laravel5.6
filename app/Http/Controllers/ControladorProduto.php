@@ -58,7 +58,11 @@ class ControladorProduto extends Controller
      */
     public function show($id)
     {
-        //
+        $prod = Produto::find($id);
+        if(isset($prod)){
+            return json_encode($prod);
+        }
+        return response('Produto não encontrado', 404);
     }
 
     /**
@@ -92,8 +96,9 @@ class ControladorProduto extends Controller
             $prod->preco = $request->input('preco');
             $prod->categoria_id = $request->input('categoria');
             $prod->save();
+            return json_encode($prod);
         }
-        return redirect('/produtos');
+        return response('Produto não encontrado', 404);
     }
 
     /**
