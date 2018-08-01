@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Categoria;
+use App\Cliente;
+use App\Endereco;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('pagina');
@@ -573,3 +575,40 @@ Route::get('/produtos/apagar/{id}', 'ControladorProduto@destroy');
 Route::get('/produtos/editar/{id}', 'ControladorProduto@edit');
 
 Route::post('/produtos/{id}', 'ControladorProduto@update');
+
+//ELOQUENTE ORM - RELACIONAMENTOS UM PRA UM
+
+Route::get('/clientes', function (){
+    $clientes = Cliente::all();
+    foreach($clientes as $c){
+        echo "<p>ID: ". $c->id. "</p>";
+        echo "<p>Nome: ". $c->nome ."</p>";
+        echo "<p>Telefone: ". $c->telefone ."</p>";
+        $e = Endereco::where('cliente_id', $c->id)->first();
+        echo "<p>Rua: ". $e->rua ."</p>";
+        echo "<p>Numero: ". $e->numero ."</p>";
+        echo "<p>Bairro: ". $e->bairro ."</p>";
+        echo "<p>Cidade: ". $e->cidade ."</p>";
+        echo "<p>UF: ". $e->uf ."</p>";
+        echo "<p>CEP: ". $e->cep ."</p>";
+        echo "<hr>";
+
+    }
+
+});
+
+Route::get('/enderecos', function (){
+    $ends = Endereco::all();
+    foreach($ends as $e){
+        echo "<p>ID: ". $e->cliente_id. "</p>";
+        echo "<p>Rua: ". $e->rua ."</p>";
+        echo "<p>Numero: ". $e->numero ."</p>";
+        echo "<p>Bairro: ". $e->bairro ."</p>";
+        echo "<p>Cidade: ". $e->cidade ."</p>";
+        echo "<p>UF: ". $e->uf ."</p>";
+        echo "<p>CEP: ". $e->cep ."</p>";
+        echo "<hr>";
+
+    }
+
+});
