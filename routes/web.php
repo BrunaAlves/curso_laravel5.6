@@ -656,3 +656,10 @@ Route::get('/clientes/json', function(){
     return $clientes->toJson();
 
 });
+
+Route::get('/enderecos/json', function(){
+  //  $enderecos = Endereco::all(); //Lazy Loading
+    $enderecos = Endereco::with(['cliente'])->get(); //Eager Loading
+    return $enderecos->toJson();
+
+});
