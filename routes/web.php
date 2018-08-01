@@ -614,3 +614,38 @@ Route::get('/enderecos', function (){
     }
 
 });
+
+Route::get('inserir', function(){
+    $c = new Cliente();
+    $c->nome = "Jose Almeida";
+    $c->telefone = "11 97979-9797";
+    $c->save();
+
+    $e = new Endereco();
+    $e->rua = "Av. do Estado";
+    $e->numero = 400;
+    $e->bairro = "Centro";
+    $e->cidade = "Sao Paulo";
+    $e->uf = "SP";
+    $e->cep = "13010-456";
+    //$e->cliente_id = $c->id;
+
+    $c->endereco()->save($e);
+
+    $c = new Cliente();
+    $c->nome = "Marcos Silva";
+    $c->telefone = "11 98787-8787";
+    $c->save();
+
+    $e = new Endereco();
+    $e->rua = "Av. do Brasil";
+    $e->numero = 1500;
+    $e->bairro = "Jardim Oliveira";
+    $e->cidade = "Sao Paulo";
+    $e->uf = "SP";
+    $e->cep = "13222-456";
+    //$e->cliente_id = $c->id;
+
+    $c->endereco()->save($e);
+
+});
