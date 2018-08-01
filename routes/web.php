@@ -649,3 +649,10 @@ Route::get('inserir', function(){
     $c->endereco()->save($e);
 
 });
+
+Route::get('/clientes/json', function(){
+    //$clientes = Cliente::all(); //Lazy Loading
+    $clientes = Cliente::with(['endereco'])->get(); //Eager Loading
+    return $clientes->toJson();
+
+});
