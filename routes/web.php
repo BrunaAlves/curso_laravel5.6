@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Categoria;
+use App\Produto;
 use App\Cliente;
 use App\Endereco;
 
@@ -130,7 +131,7 @@ Route::any('/rest/hello3', function(){ //Atender qualquer métodos Http.
 
 //NOMEANDO ROTAS
 
-Route::get('/produtos', function(){
+Route::get('/produtos.', function(){
     echo "<h1>Produtos</h1>";
     echo "<ol>";
     echo "<li>Notebook</li>";
@@ -201,7 +202,7 @@ Route::get('/email/{email}', function($email){
         return view('erro');
 });
 
-Route::get('/produtos', 'ProdutoControlador@listar');
+Route::get('/produtos.', 'ProdutoControlador@listar');
 
 Route::get('/secaoprodutos/{palavra}', 
            'ProdutoControlador@secaoprodutos');
@@ -217,7 +218,7 @@ Route::get('/loop/foreach', 'ProdutoControlador@loopForeach');
 
 //INICIO MODELOS: QUERIES SQL
 
-Route::get('/categorias', function(){ //SELECT
+Route::get('/categorias.', function(){ //SELECT
     $cats = DB::table('categorias')->get();
     foreach($cats as $cat) {
         echo "id: " . $cat->id . "; ";
@@ -552,13 +553,13 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/produtos', 'ControladorProduto@indexView');
+Route::get('/produtos.', 'ControladorProduto@indexView');
 
-Route::get('/categorias', 'ControladorCategoria@index');
+Route::get('/categorias.', 'ControladorCategoria@index');
 
 Route::get('/categorias/novo', 'ControladorCategoria@create');
 
-Route::post('/categorias', 'ControladorCategoria@store');
+Route::post('/categorias.', 'ControladorCategoria@store');
 
 Route::get('/categorias/apagar/{id}', 'ControladorCategoria@destroy');
 
@@ -662,4 +663,37 @@ Route::get('/enderecos/json', function(){
     $enderecos = Endereco::with(['cliente'])->get(); //Eager Loading
     return $enderecos->toJson();
 
+});
+
+//RELACIONAMENTO UM PRA MUITOS
+
+Route::get('/categorias', function(){
+    $cats = Categoria::all();
+    if(count($cats) === 0)
+        echo "<h4>Você não possui nenhuma categoria cadastrada</h4>";
+    else {
+        foreach($cats as $c){
+            echo "<p>" . $c->id . " - " . $c->nome . "</p>";
+
+        }
+    }
+});
+
+Route::get('/produtos', function(){
+    $prods = Produto::all();
+    if(count($prods) === 0)
+        echo "<h4>Você não possui nenhum produto cadastrada</h4>";
+    else {
+        echo "<table>";
+        echo "<thead><tr><td>Nome</td><td>Estoque</td><td>Preco</td><td>Categoria</td></tr></thread>";
+        foreach($prods as $p){
+            echo "<tr>";
+            echo "<td>" . $p->nome . "</td>";
+            echo "<td>" . $p->estoque . "</td>";
+            echo "<td>" . $p->preco . "</td>";
+            echo "<td>" . $p->categoria->nome . "</td>";
+            echo "</tr>";
+
+        }
+    }
 });
