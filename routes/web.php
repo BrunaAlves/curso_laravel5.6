@@ -6,6 +6,9 @@ use App\Categoria;
 use App\Produto;
 use App\Cliente;
 use App\Endereco;
+use App\Projeto;
+use App\Desenvolvedor;
+use App\Alocacao;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('pagina');
@@ -749,4 +752,31 @@ Route::get('/adicionarproduto/{cat}', function($catid){
     }
     $cat->load('produtos'); //retorna todos os produtos atrelados a categoria
     return $cat->toJson(); //retorna um array com as informações
+});
+
+
+//RELACIONAMENTO MUITOS PRA MUITOS
+
+Route::get('/desenvolvedor_projetos', function (){
+    $desenvolvedores = Desenvolvedor::with('projetos')->get();
+
+    foreach($desenvolvedores as $d){
+        echo "<p>Nome do Desenvolvedor: " . $d->nome . "</p>";
+        echo "<p>Cargo: " . $d->cargo . "</p>";
+        if(count($d->projetos) > 0){
+            echo "Projetos: <br>";
+            echo "<ul>";
+            foreach($d->projetos as $p){
+                echo "<li>";
+                echo "Nome: " . $p->nome . " | ";
+                echo "Estimativa horas: " . $p->estimativa_horas . " | ";
+                echo "</li>";
+            }
+            echo "</ul>";
+        }
+        echo "<hr>";
+    }
+
+    //return $desenvolvedores->toJson();
+
 });
