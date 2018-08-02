@@ -781,3 +781,28 @@ Route::get('/desenvolvedor_projetos', function (){
     //return $desenvolvedores->toJson();
 
 });
+
+
+Route::get('/projeto_desenvolvedores', function (){
+    $projetos = Projeto::with('desenvolvedores')->get();
+
+    foreach($projetos as $proj){
+        echo "<p>Nome do Projeto: " . $proj->nome . "</p>";
+        echo "<p>Estimativa: " . $proj->estimativa_horas . "</p>";
+
+        if(count($proj->desenvolvedores) > 0){
+            echo "Desnvolvedores: <br>";
+            echo "<ul>";
+            foreach($proj->desenvolvedores as $d){
+                echo "<li>";
+                echo "Nome do Desenvolvedor: " . $d->nome . " | ";
+                echo "Cargo: " . $d->cargo . " | ";
+                echo "Horas trabalhadas: " . $d->pivot->horas_semanais . " | ";
+                echo "</li>";
+            }
+            echo "</ul>";
+        }
+        echo "<hr>";
+    }
+ //   return $projetos->toJson();
+});
