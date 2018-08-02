@@ -736,3 +736,17 @@ Route::get('/removerprodutocategoria', function(){
     
 });
 
+Route::get('/adicionarproduto/{cat}', function($catid){
+    $cat = Categoria::with('produtos')->find($catid);
+
+    $p = new Produto();
+    $p->nome = "Meu novo Produto adicionado";
+    $p->estoque = 40;
+    $p->preco = 500;
+
+    if(isset($cat)){
+        $cat->produtos()->save($p); //adiciona um novo produto
+    }
+    $cat->load('produtos'); //retorna todos os produtos atrelados a categoria
+    return $cat->toJson(); //retorna um array com as informações
+});
