@@ -724,3 +724,15 @@ Route::get('/categoriasprodutos/json', function(){
     $cats = Categoria::with('produtos')->get();
     return $cats->toJson();
 });
+
+Route::get('/removerprodutocategoria', function(){
+    $p = Produto::find(10);
+    if(isset($p)){
+        $p->categoria()->dissociate();
+        $p->save();
+        return $p->toJson();
+    }
+    return '';
+    
+});
+
