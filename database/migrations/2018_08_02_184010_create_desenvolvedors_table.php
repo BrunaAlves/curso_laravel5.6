@@ -16,7 +16,7 @@ class CreateDesenvolvedorsTable extends Migration
         Schema::create('desenvolvedores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('campo');
+            $table->string('cargo');
             $table->timestamps();
         });
     }
