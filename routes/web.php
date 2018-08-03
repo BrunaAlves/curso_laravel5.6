@@ -835,3 +835,7 @@ Route::get('/desalocar', function (){
 
 Route::get('/usuarios', 'UsuarioControlador@index');
 
+Route::get('/u', function(){
+    return 'teste';
+});
+
