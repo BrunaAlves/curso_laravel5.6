@@ -839,3 +839,6 @@ Route::get('/u', function(){
     return 'teste';
 });
 
+Route::get('/terceiro', function(){
+    return 'Passou pelo terceiro middleware';
+})->middleware('terceiro:joao,20');
