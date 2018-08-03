@@ -833,7 +833,7 @@ Route::get('/desalocar', function (){
 //Route::get('/usuarios', 'UsuarioControlador@index')
 //    ->middleware('primeiro');
 
-Route::get('/usuarios', 'UsuarioControlador@index');
+Route::get('/usuarios', 'UsuarioControlador@index')->middleware('primeiro', 'segundo');
 
 Route::get('/u', function(){
     return 'teste';
