@@ -830,5 +830,8 @@ Route::get('/desalocar', function (){
 
 //MIDDLEWARE
 
-Route::get('/usuarios', 'UsuarioControlador@index')
-    ->middleware('primeiro');
+//Route::get('/usuarios', 'UsuarioControlador@index')
+//    ->middleware('primeiro');
+
+Route::get('/usuarios', 'UsuarioControlador@index');
+
