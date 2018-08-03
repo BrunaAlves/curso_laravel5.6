@@ -9,6 +9,7 @@ use App\Endereco;
 use App\Projeto;
 use App\Desenvolvedor;
 use App\Alocacao;
+use App\Http\Middleware\PrimeiroMiddleware;
 
 Route::get('/', function () { //função anomima que sera executada cada vez que o usuário executar a rota
     return view('pagina');
@@ -824,3 +825,10 @@ Route::get('/desalocar', function (){
       $proj->desenvolvedores()->detach([1,2,3]);
     }
 });
+
+
+
+//MIDDLEWARE
+
+Route::get('/usuarios', 'UsuarioControlador@index')
+    ->middleware(PrimeiroMiddleware::class);
