@@ -573,7 +573,7 @@ Route::post('/categorias/{id}', 'ControladorCategoria@update');
 
 Route::get('/produtos/novo', 'ControladorProduto@create');
 
-Route::post('/produtos', 'ControladorProduto@store');
+Route::post('/produtos.', 'ControladorProduto@store');
 
 Route::get('/produtos/apagar/{id}', 'ControladorProduto@destroy');
 
@@ -683,7 +683,7 @@ Route::get('/categorias', function(){
     }
 });
 
-Route::get('/produtos', function(){
+Route::get('/produtos.', function(){
     $prods = Produto::all();
     if(count($prods) === 0)
         echo "<h4>Você não possui nenhum produto cadastrada</h4>";
@@ -842,3 +842,5 @@ Route::get('/u', function(){
 Route::get('/terceiro', function(){
     return 'Passou pelo terceiro middleware';
 })->middleware('terceiro:joao,20');
+
+Route::get('/produtos', 'ProdutoControlador@index');
