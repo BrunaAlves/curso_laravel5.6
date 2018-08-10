@@ -898,3 +898,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/produtos', 'ProdutoControlador@index');
 
 Route::get('/departamentos', 'DepartamentoControlador@index');
+
+Route::get('/usuariolog', function(){
+    return view('usuario');
+});
