@@ -902,3 +902,7 @@ Route::get('/departamentos', 'DepartamentoControlador@index');
 Route::get('/usuariolog', function(){
     return view('usuario');
 });
+
+//LOGIN MULTIUSUÁRIO
+
+Route::get('/admin', 'AdminController@index')->name('homeadmin');
