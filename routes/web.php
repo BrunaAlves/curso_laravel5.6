@@ -905,4 +905,8 @@ Route::get('/usuariolog', function(){
 
 //LOGIN MULTIUSUÁRIO
 
-Route::get('/admin', 'AdminController@index')->name('homeadmin');
+Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+
+Route::get('/admin/login', 'AdminController@index')->name('admin.login');
+
+Route::get('/admin/login', 'AdminController@index')->name('admin.login.submit');
