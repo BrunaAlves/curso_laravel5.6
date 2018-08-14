@@ -13,7 +13,7 @@ class AdminLoginController extends Controller
     }
 
     public function login(Request $request){
-        return true;
+        return "OK";
     }
 
     public function index(){
